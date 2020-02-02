@@ -44,7 +44,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine,
 
     hwnd = CreateWindow(szAppName,
                         TEXT("Magnify-JetMeta@github"),
-                        WS_OVERLAPPEDWINDOW&~WS_MAXIMIZEBOX,
+                        WS_OVERLAPPEDWINDOW&~WS_MAXIMIZEBOX&~WS_SIZEBOX,
                         CW_USEDEFAULT,
                         CW_USEDEFAULT,
                         295,
@@ -75,10 +75,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_CREATE:
+	{
+		RECT r;
+		GetClientRect(hwnd,&r);
+		const unsigned int x_offset = (r.right - r.left - MAGNIFY_WIDTH)>>1;
+		const unsigned int y_offset = (r.bottom - r.top - MAGNIFY_WIDTH) >> 1;
         hBitMap = CreateWindowEx(0, TEXT("STATIC"),
                                  NULL,
                                  SS_CENTER | WS_CHILD | WS_VISIBLE,
-                                 20, 20, MAGNIFY_WIDTH, MAGNIFY_WIDTH,
+								 x_offset, y_offset, MAGNIFY_WIDTH, MAGNIFY_WIDTH,
                                  hwnd,
                                  NULL,
                                  hModule,
@@ -95,7 +100,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         SetTimer(hwnd, 1, 80, NULL);
 
         return 0;
-
+	}
     case WM_CLOSE:
         DeleteDC(hMemDC);
         DeleteObject(hBit);

@@ -11,6 +11,9 @@
 [Release](https://github.com/JetDemo/Magnify/tree/master/bin "Release")
 
 ## changelog
+### [0.000.02] - 2020-02-02
+- disable resizing window by dragging borders
+
 ### [0.000.01] - 2017-08-16
 #### init
 - add vs2015 prj
