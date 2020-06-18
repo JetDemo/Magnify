@@ -11,6 +11,9 @@
 [Release](https://github.com/JetDemo/Magnify/tree/master/bin "Release")
 
 ## changelog
+### [0.000.03] - 2020-06-18
+- as color picker show rgb info
+
 ### [0.000.02] - 2020-02-02
 - disable resizing window by dragging borders
 
